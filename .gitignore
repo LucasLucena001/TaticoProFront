@@ -7,11 +7,14 @@
 # Diretórios de dependências
 node_modules/
 venv/
+**/__pycache__/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
+*.py[cod]
+*$py.class
 
 # IDEs
 .vscode/
