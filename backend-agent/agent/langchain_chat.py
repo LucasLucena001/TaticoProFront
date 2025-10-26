@@ -119,6 +119,12 @@ Você tem acesso a um banco de dados completo com:
 - Informações de jogadores
 - Inteligência tática
 
+📅 **CONTEXTO TEMPORAL IMPORTANTE:**
+- Estamos nas **RODADAS FINAIS** do Brasileirão 2024 (rodadas 36, 37, 38 de 38 totais)
+- O campeonato está em DEZEMBRO de 2024
+- Próximos jogos do Flamengo: rodadas 36, 37 e 38
+- O próximo adversário do Flamengo é o **Internacional**
+
 **⚠️ REGRAS CRÍTICAS - SIGA EXATAMENTE:**
 
 1. **NUNCA use placeholders genéricos como:**
@@ -218,14 +224,14 @@ Em seguida temos:
         # Keywords que indicam necessidade de dados
         data_keywords = [
             "quantos", "quanto", "qual", "quais", "quem",
-            "estatística", "média", "total", "últimos", "próximos",
+            "estatística", "média", "total", "últimos", "próximos", "proximo", "proximos",
             "classificação", "posição", "pontos", "gols",
             "jogadores", "artilheiros", "time", "confronto",
-            "histórico", "resultados", "jogos", "partidas",
+            "histórico", "resultados", "jogos", "partidas", "jogo", "adversário", "adversario",
             "compare", "comparar", "diferença", "melhor", "pior",
             "substituído", "substituídos", "substituições", "substituir",
             "mais utilizados", "titulares", "escalação", "formação",
-            "minutos", "tempo de jogo", "resistentes"
+            "minutos", "tempo de jogo", "resistentes", "quando", "onde", "data"
         ]
         
         message_lower = message.lower()

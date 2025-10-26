@@ -99,8 +99,22 @@ class LlamaSQLRetriever:
         F. MOMENTUM (últimos 5 jogos):
            Query SQL: SELECT time, pontos_recentes, sequencia_recente FROM int_momentum_atual;
            
-        G. PRÓXIMO JOGO:
-           Query SQL: SELECT * FROM int_proximo_adversario;
+        G. PRÓXIMOS JOGOS DO FLAMENGO (TEMPORADA 2024):
+           ⚠️ A tabela int_proximo_adversario pode estar DESATUALIZADA!
+           ✅ SEMPRE use Jogos_Completos_2024 para jogos futuros:
+           
+           Query SQL para próximos 3 jogos do Flamengo:
+           SELECT round, date, home_team_name, away_team_name, venue_name, venue_city
+           FROM "Jogos_Completos_2024"
+           WHERE (home_team_name = 'Flamengo' OR away_team_name = 'Flamengo')
+           AND round IN ('Regular Season - 36', 'Regular Season - 37', 'Regular Season - 38')
+           ORDER BY date ASC
+           LIMIT 3;
+           
+           CONTEXTO IMPORTANTE: 
+           - O Brasileirão 2024 tem 38 rodadas no total
+           - Estamos nas rodadas finais (36, 37, 38)
+           - Use SEMPRE a tabela Jogos_Completos_2024 para jogos futuros
         
         IMPORTANTE:
         - int_jogadores_detalhados contém TODOS os dados de jogadores JÁ PROCESSADOS
@@ -209,7 +223,10 @@ class LlamaSQLRetriever:
         # Lista de TODAS as tabelas e suas descrições DETALHADAS
         table_descriptions = {
             # Tabelas brutas de dados (USE APENAS SE NÃO EXISTIR TABELA int_* EQUIVALENTE)
-            "Jogos_Completos_2024": "Jogos completos do Brasileirão 2024 (fixture_id, round, date, home_team, away_team, venue, status)",
+            "Jogos_Completos_2024": """⭐ JOGOS DO BRASILEIRÃO 2024 - USE PARA PRÓXIMOS JOGOS:
+                Colunas: fixture_id, round (ex: 'Regular Season - 36'), date, home_team_name, away_team_name, venue_name, venue_city, status
+                ⚠️ Para PRÓXIMOS JOGOS DO FLAMENGO, filtre por: (home_team_name = 'Flamengo' OR away_team_name = 'Flamengo')
+                ⚠️ Estamos nas rodadas finais: 36, 37, 38 (total de 38 rodadas)""",
             "Estatisticas_Por_Jogo_2024": "Estatísticas detalhadas por jogo (chutes, posse, faltas, cartões, escanteios, passes)",
             "Estatisticas_Jogadores_Por_Jogo_2024": "Estatísticas individuais de jogadores por jogo (rating, gols, assistências, passes, dribles, tackles)",
             "Eventos_Jogos_2024": "Eventos dos jogos (gols, cartões, substituições, momento/minuto do evento)",
@@ -246,7 +263,7 @@ class LlamaSQLRetriever:
                 Colunas: posicao, time, pontos_total, jogos_disputados, total_vitorias, total_empates, total_derrotas,
                 gols_marcados, gols_sofridos, saldo_gols, aproveitamento_pct, ultimos_5_jogos""",
             
-            "int_proximo_adversario": "Próximo jogo do Flamengo (adversario, data, horario, local, rodada_campeonato)",
+            "int_proximo_adversario": "⚠️ DESATUALIZADO! Não use. Para próximos jogos, use Jogos_Completos_2024",
             "int_vulnerabilidades_taticas": "Vulnerabilidades táticas do Inter (falhas_goleiro, disciplina, eficiencia_escanteios)",
             "int_analise_pressao": "Análise psicológica sob pressão (comportamento_jogos_grandes, performance_final_campeonato)",
             "int_analise_tatica_avancada": "Análise tática avançada (padroes_gols, vulnerabilidades_casa_fora, indisciplina)",
